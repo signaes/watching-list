@@ -5,9 +5,11 @@
   "author": "Thiago Oliveira",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --open --mode development",
+    "dev": "nf start",
+    "dev:server": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production",
-    "lint": "eslint"
+    "lint": "eslint",
+    "tailwind": "npx tailwindcss build tailwind.css -o src/styles/_tailwind.css"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
@@ -29,10 +31,14 @@
     "eslint-plugin-jsx-a11y": "^6.3.0",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^4",
+    "foreman": "^3.0.1",
     "fork-ts-checker-webpack-plugin": "^5.0.2",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
+    "sass": "^1.26.8",
+    "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
+    "tailwindcss": "^1.4.6",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.5",
     "webpack": "^4.43.0",
