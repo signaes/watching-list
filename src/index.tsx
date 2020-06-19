@@ -8,7 +8,7 @@ const root = document.getElementById('root');
 ReactDom.render(<App />, root);
 
 if (module.hot) {
-  module.hot.accept('./components/App.js', function () {
+  module.hot.accept('./components/App.tsx', () => {
     ReactDom.render(<App />, root);
-  })
+  });
 }

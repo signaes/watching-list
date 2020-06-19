@@ -1,44 +1,68 @@
-const path = require('path')
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const webpack = require('webpack');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.tsx',
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    alias: {
+      '~': path.join(__dirname, 'src'),
+    },
+  },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.js',
   },
   devtool: 'inline-source-map',
   devServer: {
     contentBase: './build',
-    hot: true
+    hot: true,
+    writeToDisk: true,
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(ts|tsx|js|jsx)$/,
+        include: [path.resolve(__dirname, 'src')],
+        exclude: /node_modules/,
+        resolve: {
+          extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        },
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+      {
+        enforce: 'pre',
+        test: /\.(ts|tsx)$/,
+        include: [path.resolve(__dirname, 'src')],
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.html$/,
         use: {
-          loader: 'html-loader'
-        }
+          loader: 'html-loader',
+        },
       },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
-      }
-    ]
+      },
+    ],
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin(),
+    new webpack.ProgressPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebPackPlugin({
       template: './src/index.html',
-      filename: './index.html'
-    })
-  ]
-}
+      filename: './index.html',
+    }),
+  ],
+};
