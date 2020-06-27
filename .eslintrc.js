@@ -41,6 +41,8 @@ module.exports = {
   rules: {
     'import/extensions': [1, 'never'],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'react/button-has-type': [0],
+    'react/jsx-one-expression-per-line': [0],
     'react/prop-types': [0],
   },
 };
