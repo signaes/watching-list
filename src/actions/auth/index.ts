@@ -1,7 +1,10 @@
 import { Dispatch } from 'redux'
 import { signInWithGoogle, signOut, auth, firestore } from '../../modules/firebase';
+import storage from '../../modules/storage';
 
 let unsubscribe: () => any
+
+const storageAuthData: { [key: string]: any } | null = storage.get('auth');
 
 export interface UserData {
   displayName: string | null;
@@ -44,6 +47,8 @@ export const signInUser = () => async (dispatch: Dispatch) => {
       const user = { uid, displayName, email, refreshToken }
 
       if (snapshot.exists) {
+        storage.set('auth', { user, signedIn: true })
+
         return dispatch({
           type: AUTH_ACTIONS.SIGN_IN,
           payload: { user }
@@ -57,6 +62,8 @@ export const signInUser = () => async (dispatch: Dispatch) => {
         createdAt,
         refreshToken,
       })
+
+      storage.set('auth', { user, signedIn: true })
 
       return dispatch({
         type: AUTH_ACTIONS.SIGN_IN,
@@ -84,7 +91,11 @@ export const signOutUser = () => async (dispatch: Dispatch) => {
   try {
     const response = await signOut();
 
-    unsubscribe();
+    storage.remove('auth');
+
+    if (typeof unsubscribe === 'function') {
+      unsubscribe();
+    }
 
     dispatch({ type: AUTH_ACTIONS.SIGN_OUT });
   } catch (error) {

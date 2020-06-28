@@ -1,14 +1,23 @@
 import { AUTH_ACTIONS, ErrorData, AuthAction, AuthActionTypes, Auth, UserData } from '../../actions/auth';
+import storage from '../../modules/storage';
 
-const initialState: Auth = {
+const storageAuthData: { [key: string]: any } | null = storage.get('auth');
+const baseInitialState: Auth = {
   loading: false,
   signedIn: false,
+  error: null,
   user: {
     displayName: null,
     email: null,
   },
-  error: null,
 };
+const initialState: Auth = storageAuthData
+  ? {
+    ...baseInitialState,
+    signedIn: storageAuthData.signedIn,
+    user: storageAuthData.user,
+  }
+  : baseInitialState;
 
 const authReducer = (state = initialState, action: AuthAction) => {
   switch (action.type) {

@@ -1,3 +1,4 @@
 export const PROJECT = {
-  TITLE: 'Watching List',
+  TITLE: process.env.PROJECT_TITLE,
+  HASH: process.env.PROJECT_HASH,
 };
