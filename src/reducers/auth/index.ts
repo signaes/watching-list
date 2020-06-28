@@ -11,15 +11,12 @@ const initialState: Auth = {
 };
 
 const authReducer = (state = initialState, action: AuthAction) => {
-
-  console.log(' AUTH action ', action)
-
   switch (action.type) {
     case AUTH_ACTIONS.ERROR:
       return {
         ...initialState,
         error: (action.payload.error as ErrorData)
-      }
+      };
     case AUTH_ACTIONS.LOADING:
       return {
         ...state,
@@ -37,7 +34,7 @@ const authReducer = (state = initialState, action: AuthAction) => {
     case AUTH_ACTIONS.SIGN_OUT:
       return initialState;
     default:
-      return initialState;
+      return state;
   }
 };
 

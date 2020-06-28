@@ -5,17 +5,19 @@ const InputField: React.SFC<{
   type: string;
   id: string;
   label: string;
+  className?: string;
 }> = ({
   name,
   type,
   id,
   label,
+  className = '',
 }) => (
-  <div>
+  <div className={className}>
     <label htmlFor={id} className="flex flex-col">
       <span>{ label }</span>
       <input
-        className="rounded-md border boder-gray-100 px-4 py-2"
+        className="px-4 py-2 border rounded-md boder-gray-100"
         type={type}
         name={name}
         id={id}

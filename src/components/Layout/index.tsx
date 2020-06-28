@@ -1,41 +1,55 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { signOutUser, Auth } from '../../actions/auth';
+import { search, SearchYoutube } from '../../actions/youtube';
 import { SignOutButton } from '../buttons';
+import Wrapper from './Wrapper';
+
+export interface LayoutContextProps {
+  auth: Auth;
+  youtube: any;
+  searchYoutube: any;
+}
+type SFC = (props: LayoutContextProps) => (
+  React.Component | React.Component[] | JSX.Element | JSX.Element[] | string | Element | React.Component<unknown, unknown, any>
+);
 
 const Layout: React.SFC<{
   className?: string;
-  children: React.Component | React.Component[] | JSX.Element | JSX.Element[] | string;
+  children: React.Component | React.Component[] | JSX.Element | JSX.Element[] | SFC | string;
   auth: Auth;
+  youtube: any;
   signOut: () => void;
+  searchYoutube: any;
 }> = ({
   className = '',
   children,
+  auth,
+  youtube,
   signOut,
-  auth: {
-    user: {
-      displayName,
-    },
-  },
+  searchYoutube,
 }) => (
   <div className={className}>
-    <header className="flex items-center justify-between">
-      Welcome { displayName }.
-
-      <SignOutButton onClick={signOut} />
-    </header>
-
-    { children }
+    <Wrapper>
+      <header className="flex items-center justify-between py-8">
+        <SignOutButton onClick={signOut} />
+      </header>
+    </Wrapper>
+    { typeof children === 'function' ? (children as SFC)({ auth, youtube, searchYoutube }) : children }
   </div>
 );
 
-function mapStateToProps({ auth }: { auth: Auth }) {
-  return { auth };
+function mapStateToProps({ auth, youtube }: { auth: Auth, youtube: any }) {
+  return {
+    auth,
+    youtube,
+  };
 }
 
 export default connect(
   mapStateToProps,
   {
     signOut: signOutUser,
+    searchYoutube: search,
   },
 )(Layout);

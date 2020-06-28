@@ -16,17 +16,17 @@ export interface Auth {
   user: UserData;
   error: ErrorData | null;
 }
-export type AuthActionTypes = 'LOADING' | 'SIGN_IN' | 'SIGN_OUT' | 'ERROR';
+export type AuthActionTypes = 'AUTH_LOADING' | 'AUTH_SIGN_IN' | 'AUTH_SIGN_OUT' | 'AUTH_ERROR';
 export interface AuthAction {
   type: AuthActionTypes;
   payload: Auth;
 }
 
 export const AUTH_ACTIONS = Object.freeze({
-  LOADING:  'LOADING' as AuthActionTypes,
-  SIGN_IN:  'SIGN_IN' as AuthActionTypes,
-  SIGN_OUT: 'SIGN_OUT' as AuthActionTypes,
-  ERROR:    'ERROR' as AuthActionTypes,
+  LOADING:  'AUTH_LOADING' as AuthActionTypes,
+  SIGN_IN:  'AUTH_SIGN_IN' as AuthActionTypes,
+  SIGN_OUT: 'AUTH_SIGN_OUT' as AuthActionTypes,
+  ERROR:    'AUTH_ERROR' as AuthActionTypes,
 })
 
 export const signInUser = () => async (dispatch: Dispatch) => {
