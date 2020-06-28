@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { signOutUser, Auth } from '../../actions/auth';
-import { search, SearchYoutube } from '../../actions/youtube';
+import { search } from '../../actions/youtube';
 import { SignOutButton } from '../buttons';
 import Wrapper from './Wrapper';
 
@@ -31,8 +31,8 @@ const Layout: React.SFC<{
 }) => (
   <div className={className}>
     <Wrapper>
-      <header className="flex items-center justify-between py-8">
-        <SignOutButton onClick={signOut} />
+      <header className="flex items-center justify-end py-8">
+        <SignOutButton className="self-end" onClick={signOut} />
       </header>
     </Wrapper>
     { typeof children === 'function' ? (children as SFC)({ auth, youtube, searchYoutube }) : children }
