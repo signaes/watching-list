@@ -1,5 +1,6 @@
 import * as React from 'react';
 import VideoInfo from '../VideoInfo';
+import Display from '../Display';
 
 const VideoItem: React.SFC<{
   title: string;
@@ -8,6 +9,9 @@ const VideoItem: React.SFC<{
   publishedAt: Date;
   thumbnailURL: string;
   onClick: () => any;
+  onSaveVideo: () => any;
+  showSaveForLater?: boolean;
+  alreadySaved?: boolean;
 }> = ({
   title,
   description,
@@ -15,6 +19,9 @@ const VideoItem: React.SFC<{
   publishedAt,
   thumbnailURL,
   onClick: handleClick,
+  onSaveVideo: handleSaveVideo,
+  showSaveForLater = false,
+  alreadySaved = false,
 }) => (
   <article
     className="flex flex-col cursor-pointer group"
@@ -37,6 +44,18 @@ const VideoItem: React.SFC<{
       channelTitle={channelTitle}
       publishedAt={publishedAt}
     />
+    <Display condition={showSaveForLater}>
+      <div className="mt-4">
+        <button type="button" className="hover:underline" onClick={handleSaveVideo}>
+          Save for Later
+        </button>
+      </div>
+    </Display>
+    <Display condition={alreadySaved}>
+      <div className="mt-4 text-green-600">
+        Already saved!
+      </div>
+    </Display>
   </article>
 );
 

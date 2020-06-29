@@ -9,6 +9,8 @@ const baseInitialState: Auth = {
   user: {
     displayName: null,
     email: null,
+    uid: null,
+    refreshToken: null,
   },
 };
 const initialState: Auth = storageAuthData

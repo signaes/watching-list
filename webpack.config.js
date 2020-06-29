@@ -16,6 +16,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].bundle.js',
+    publicPath: '/',
   },
   optimization: {
     splitChunks: {
@@ -27,6 +28,7 @@ module.exports = {
     contentBase: './build',
     hot: true,
     writeToDisk: true,
+    historyApiFallback: true,
   },
   module: {
     rules: [

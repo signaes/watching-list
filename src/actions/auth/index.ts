@@ -9,6 +9,8 @@ const storageAuthData: { [key: string]: any } | null = storage.get('auth');
 export interface UserData {
   displayName: string | null;
   email: string | null;
+  uid: string | null;
+  refreshToken: string | null;
 };
 export interface ErrorData {
   message: any;
