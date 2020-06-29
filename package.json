@@ -9,7 +9,8 @@
     "dev:server": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production",
     "lint": "eslint",
-    "tailwind": "npx tailwindcss build tailwind.css -o src/styles/_tailwind.css"
+    "tailwind": "npx tailwindcss build tailwind.css -o src/styles/_tailwind.css",
+    "deploy": "yarn build && firebase deploy"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
