@@ -24,7 +24,7 @@ const VideoModal: React.SFC<{
       className="w-full h-full"
       title={title}
       id="player"
-      src={`http://www.youtube.com/embed/${videoId}`}
+      src={`https://www.youtube.com/embed/${videoId}`}
       frameBorder="0"
       allowFullScreen
     />
