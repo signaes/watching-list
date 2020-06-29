@@ -34,6 +34,7 @@ const VideoModal: React.SFC<{
         description={description}
         channelTitle={channelTitle}
         publishedAt={publishedAt}
+        fromModal
       />
     </div>
   </Modal>

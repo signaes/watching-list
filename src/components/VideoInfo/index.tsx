@@ -6,18 +6,26 @@ const VideoInfo: React.SFC<{
   description: string;
   channelTitle: string;
   publishedAt: Date;
+  fromModal?: boolean;
 }> = ({
   title,
   description,
   channelTitle,
   publishedAt,
+  fromModal = false,
 }) => (
   <>
     <header className="mb-4">
-      <h1 className="mb-2 text-2xl leading-7">
+      <h1
+        className="mb-2 text-2xl leading-7"
+        id={fromModal ? 'dialog-title' : undefined}
+      >
         { title }
       </h1>
-      <h2 className="text-gray-600 truncate">
+      <h2
+        className="text-gray-600 truncate"
+        id={fromModal ? 'dialog-description' : undefined}
+      >
         { description }
       </h2>
     </header>
