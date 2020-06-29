@@ -4,3 +4,5 @@ build/
 .env
 
 yarn-error.log
+
+.firebase/
